@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pay with Paystack</title>
+</head>
+<body>
+    <h1>Pay with Paystack</h1>
+    
+    <button type="button" onclick="payWithPaystack()"> Pay Now </button>
+
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+        function payWithPaystack() {
+            var handler = PaystackPop.setup({
+                key: 'pk_live_e74ee0a06c35fb9ffad2e0712922f06ba846a93b', // Replace with your public key
+                email: 'tuakajack6@gmail.com', // Replace with the customer's email
+                amount: 10000, // The amount in kobo (5000 kobo = 50 Naira)
+                currency: "NGN", // Replace with the desired currency, e.g. USD, NGN
+                
+                callback: function(response) {
+                    // What happens when the transaction is successful
+                    alert('Payment successful. Transaction reference: ' + response.reference);
+                    
+                    // You can make an AJAX request to your server here to verify the transaction
+                },
+                onClose: function() {
+                    alert('Transaction was not completed, window closed.');
+                }
+            });
+            handler.openIframe();
+        }
+    </script>
+</body>
+</html>
